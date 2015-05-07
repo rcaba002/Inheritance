@@ -18,17 +18,27 @@ namespace inheritanceProject
         public Shape()
         {
             Height = 0;
+            Length = 0;
             Width = 0;
             Radius = 0;
+            Base = 0;
+            Pi = Math.PI;
         }
 
-        string[] ShapeType = new string[3] { "SQUARE", "RECTANGLE", "CIRCLE" };
+        string[] ShapeType = new string[6] { "SQUARE", "RECTANGLE", "CIRCLE", "PARALLELOGRAM", "TRIANGLE", "ELLIPSE" };
 
         private double height;
         public double Height
         {
             get { return height; }
             set { height = value; }
+        }
+
+        private double length;
+        public double Length
+        {
+            get { return length; }
+            set { length = value; }
         }
 
         private double width;
@@ -43,6 +53,20 @@ namespace inheritanceProject
         {
             get { return radius; }
             set { radius = value; }
+        }
+
+        private double _base;
+        public double Base
+        {
+            get { return _base; }
+            set { _base = value;}
+        }
+
+        private double pi;
+        public double Pi
+        {
+            get { return pi; }
+            set { pi = value; }
         }
 
         private string type;
@@ -98,11 +122,58 @@ namespace inheritanceProject
         {
             get
             {
-                return 3.14 * Radius * Radius;
+                return Pi * Radius * Radius;
             }
         }
     }
 
+    class Parallelogram : Shape
+    {
+        public Parallelogram()
+        {
+            Type = "PARALLELOGRAM";
+        }
+
+        public override double Area
+        {
+            get
+            {
+                return Base * Height;
+            }
+        }
+    }
+
+    class Triangle : Shape
+    {
+        public Triangle()
+        {
+            Type = "TRIANGLE";
+        }
+
+        public override double Area
+        {
+            get
+            {
+                return .5 * Height * Base;
+            }
+        }
+    }
+
+    class Ellipse : Shape
+    {
+        public Ellipse()
+        {
+            Type = "ELLIPSE";
+        }
+
+        public override double Area
+        {
+            get
+            {
+                return Pi * Length * Base;
+            }
+        }
+    }
 
     //We will create an instance of the Rectangle class and use it to calculate the area and display it.
     class UseRactangle
@@ -123,6 +194,30 @@ namespace inheritanceProject
             Circ.Radius = 1;
 
             Console.WriteLine("Total area of the circle: {0}", Circ.Area);
+            Console.ReadKey();
+
+            Parallelogram Para = new Parallelogram();
+
+            Para.Base = 5;
+            Para.Height = 8;
+
+            Console.WriteLine("Total area of a parallelogram: {0}", Para.Area);
+            Console.ReadKey();
+
+            Triangle Tria = new Triangle();
+
+            Tria.Base = 3;
+            Tria.Height = 7;
+
+            Console.WriteLine("Total area of a triangle: {0}", Tria.Area);
+            Console.ReadKey();
+
+            Ellipse Elli = new Ellipse();
+
+            Elli.Base = 8;
+            Elli.Length = 4;
+
+            Console.WriteLine("Total area of a ellipse: {0}", Elli.Area);
             Console.ReadKey();
         }
     }
